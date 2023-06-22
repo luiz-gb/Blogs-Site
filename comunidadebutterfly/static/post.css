@@ -1,0 +1,69 @@
+body {
+    background-color: white;
+}
+
+#bacana {
+    text-align: center;
+    color:orange;
+    margin-top: 15px;
+}
+
+#bacana2 {
+    text-align: center;
+    color: black;
+}
+#blabla {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+#feed {
+    margin-top: 15px;
+    color: #ffa500;
+    text-align: center;
+}
+
+.opa {
+    background: #f2f5f8;
+    width: 900px;
+}
+
+#coluna1 {
+    background-color: #394857;
+    border-radius: 10px;
+}
+
+.rounded-image{
+    border-radius: 50%;
+}
+
+#arroba {
+    color: white;
+    text-align: center;
+    height: 70px;
+}
+
+#text1 {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 165px;
+}
+#text1 span {
+    margin-right: 5px;
+}
+
+#post {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 113px;
+}
+.data {
+    position: absolute;
+    color:#394857;
+    bottom: 1.5%;
+    left: 80.5%;
+}

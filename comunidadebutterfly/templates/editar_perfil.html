@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <style>
+    body {
+        background-image: url("https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?size=626&ext=jpg&ga=GA1.1.838925298.1685831121&semt=locales");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+<div class="container w-50 p-5 mt-5">
+    <form method="POST" action="" class="border shadow-lg border-black p-5 bg-white" enctype="multipart/form-data" style="border-radius: 10px;">
+      {{ perfil.csrf_token }}
+      <legend>Editar Perfil</legend>
+      <fieldset>
+        <div class="form-group">
+          {{ perfil.username.label(class="form-control-label") }}
+
+          {% if perfil.username.errors %}
+            {{ perfil.username(class="form-control is-invalid") }}
+          <div class="invalid-feedback">
+            {% for erro in perfil.username.errors %}
+              {{ erro }}
+            {% endfor %}
+          </div>
+          {% else %}
+            {{ perfil.username(class="form-control") }}
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ perfil.email.label(class="form-control-label") }}
+          {% if perfil.email.errors %}
+            {{ perfil.email(class="form-control is-invalid") }}
+          <div class="invalid-feedback">
+            {% for erro in perfil.email.errors %}
+              {{ erro }}
+            {% endfor %}
+          </div>
+          {% else %}
+            {{ perfil.email(class="form-control") }}
+          {% endif %}
+        </div>
+        <div class="form-group mt-2">
+          {{ perfil.foto_perfil.label() }}
+          {{ perfil.foto_perfil(class="form-control-file") }}
+          {% if perfil.foto_perfil.errors %}
+            {% for erro in perfil.foto_perfil.errors %}
+              <span class="text-danger"> {{ erro }} </span>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </fieldset>
+      {{ perfil.botao_salvar(class="btn btn-primary mt-2") }}
+    </form>
+  </div>
+{% endblock %}

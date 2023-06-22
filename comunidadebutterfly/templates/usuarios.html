@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        body{
+            background-color: rgb(0, 0, 0);
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% for usuario in lista_usuarios %}
+        <div class="page-content page-container mx-auto w-100" id="page-content">
+            <div class="padding">
+                <div class="row container d-flex justify-content-center mx-auto mt-3">
+                    <div class="col-xl-6 col-md-12">
+                        <div class="card user-card-full">
+                            <div class="row m-l-0 m-r-0">
+                                <div class="col-sm-4 bg-c-lite-green user-profile">
+                                    <div class="card-block text-center text-white">
+                                        <div class="m-b-30 w-50" style="margin-left: 36px;">
+                                            <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(usuario.foto_perfil)) }}" class="img-radius w-100 rounded-image" alt="User-Profile-Image" style="border-radius: 50%;">
+                                        </div>
+                                        <h6 class="f-w-600"> @{{ usuario.username }}</h6>
+                                        <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="card-block">
+                                        
+                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informações</h6>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Email</p>
+                                                <h6 class="text-muted f-w-400">{{ usuario.email }}</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">User</p>
+                                                <h6 class="text-muted f-w-400">@{{ usuario.username }}</h6>
+                                            </div>
+                                        </div>
+                                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Publicações</h6>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Recente</p>
+                                                <h6 class="text-muted f-w-400">...</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Posts</p>
+                                                <h6 class="text-muted f-w-400">{{ dic[usuario] }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

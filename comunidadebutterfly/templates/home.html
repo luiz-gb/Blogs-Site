@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    {% if current_user.is_authenticated %}
+        <div class="card2">
+            <h4> Feed </h4>
+            <hr style="margin-top: 1px;">
+            <p style="text-align: center; color: white; font-size:15px; margin: 10px;">
+                 Esse é um site com base em blogs, desenvolvido pelo software engenieer Luiz Borges
+            </p>
+            <ul>
+                <a href="https://www.instagram.com/l.bxrgs/">
+                    <li>
+                        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077042.png" alt="insta">
+                    </li>
+                </a>
+                <a href="https://github.com/luiz-gb">
+                    <li>
+                        <img src="https://cdn-icons-png.flaticon.com/128/733/733609.png" alt="github">
+                    </li>
+                </a>
+                <a href="https://www.linkedin.com/in/luiz-miguel-gomes-borges-8a6601256/">
+                    <li>
+                        <img src="https://cdn-icons-png.flaticon.com/128/3669/3669739.png" alt="linkedin">
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="container">
+        {% for post in posts %}
+            {% if post.autor==current_user %}
+                <div class="row border mt-4 opa" style="margin-left: 107px; position: relative; border-radius: 10px;">
+
+                    <div class="col col-2 p-3" id="coluna1">
+                        <div class="m-b-30 w-50" style="margin-left: 31px;">
+                            <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="img-radius w-100 rounded-image" alt="User-Profile-Image">
+                        </div>
+                        <h6 class="f-w-600" id="arroba"> @{{ post.autor.username }}</h6>
+                    </div>
+                    
+                    <div class="col col-10 p-3">
+                        <a href="{{ url_for('post', post_id=post.id) }}" class="postit" id="blz"> 
+                            <h3> {{ post.titulo }} </h3>
+                        </a>
+                        <a href="{{ url_for('editar_post', post_id=post.id) }}">
+                            <button class="btn botao2">
+                                <img src="https://cdn-icons-png.flaticon.com/128/4277/4277132.png" style="margin-right: 70px;" class="img2" alt="ajkds">
+                            </button>
+                        </a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalzin{{ post.id }}">
+                            <button class="btn botao">
+                                <img src="https://cdn-icons-png.flaticon.com/128/54/54324.png" class="img" alt="Uma maçã vermelha fresca">
+                            </button>
+                        </a>
+                        <p> {{ post.corpo}} </p>
+                        <h6 class="data">
+                           <strong> Publicado em: {{ post.data_criacao.strftime('%d/%m/%y') }} </strong>
+                        </h6>
+                    </div>
+
+                </div>
+            {% else %}
+                <div class="row border mt-4 opa" style="margin-left: 107px; border-radius: 10px; position: relative;">
+
+                    <div class="col col-2 p-3" id="coluna1">
+                        <div class="m-b-30 w-50" style="margin-left: 31px;">
+                            <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="img-radius w-100 rounded-image" alt="User-Profile-Image">
+                        </div>
+                        <h6 class="f-w-600" id="arroba"> @{{ post.autor.username }}</h6>
+                    </div>
+                    
+                    <div class="col col-10 p-3">
+                        <a href="{{ url_for('post', post_id=post.id) }}" class="postit" id="blz"> 
+                            <h3> {{ post.titulo }} </h3>
+                        </a>
+                        <p> {{ post.corpo}} </p>
+                        <h6 class="data">
+                            <strong> Publicado em: {{ post.data_criacao.strftime('%d/%m/%y') }} </strong>
+                        </h6>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- Modal -->
+            <div class="modal fade" style="top: 31%;" id="modalzin{{ post.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: red;">Alerta</h1>
+                    <button type="button" class="btn-close btn" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Realmente deseja excluir o post?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <a href=" {{ url_for('excluir_post', post_id=post.id) }}">
+                        <button type="button" class="btn btn-primary" style="background-color: red; border: red;">Excluir</button>
+                    </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div style="margin-bottom: 20px;"></div>
+        </div>
+
+    {% else %}
+        <h1 id="bacana"> Bem vindo a Comunidade Butterfly</h1>
+        <h3 id="bacana2"> Posts e Conversas em um só lugar!</h3>
+        <hr class="container">
+        <h5 id="text1"> 
+            <span> Não tem uma conta? </span> 
+            <a href="{{url_for('cadastro')}}" id="blabla">  Clique aqui!</a>
+        </h5> 
+    {% endif %}
+{% endblock %}

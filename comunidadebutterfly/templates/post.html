@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+        <div class="container" id="post">
+            <div class="row border mt-4 opa" style="margin-left: 107px; border-radius: 10px; position: relative;">
+
+                <div class="col col-2 p-3" id="coluna1">
+                    <div class="m-b-30 w-50" style="margin-left: 31px;">
+                        <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="img-radius w-100 rounded-image" alt="User-Profile-Image">
+                    </div>
+                    <h6 class="f-w-600" id="arroba"> @{{ post.autor.username }}</h6>
+                </div>
+                
+                <div class="col col-10 p-3">
+                    <h3 style="color: #394857"> {{ post.titulo }} </h2>
+                    <p> {{ post.corpo}} </p>
+                    <h6 class="data">
+                        <strong> Publicado em: {{ post.data_criacao.strftime('%d/%m/%y') }} </strong>
+                    </h6>
+                </div>
+            </div>
+        </div>
+{% endblock %}

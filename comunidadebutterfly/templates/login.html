@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <style>
+    body {
+        background-image: url("https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?size=626&ext=jpg&ga=GA1.1.838925298.1685831121&semt=locales");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+    }
+   
+    .espacin {
+      margin-top: 2px;
+    }
+
+    #form:focus {
+      outline: none;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+<div class="container w-50 p-5 mt-5">
+    <form method="POST" action="" class="border shadow-lg border-black p-5 bg-white" style="border-radius: 10px;">
+      {{ form_login.csrf_token }}
+      <legend>Login</legend>
+      <fieldset>
+        <div class="form-group" id="form">
+          {{ form_login.email.label(class="form-control-label") }}
+
+          {% if form_login.email.errors %}
+            {{ form_login.email(class="form-control is-invalid") }}
+          <div class="invalid-feedback">
+            {% for erro in form_login.email.errors %}
+              {{ erro }}
+            {% endfor %}
+          </div>
+          {% else %}
+            {{ form_login.email(class="form-control") }}
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form_login.senha.label(class="form-control-label") }}
+          {% if form_login.senha.errors %}
+            {{ form_login.senha(class="form-control is-invalid") }}
+          <div class="invalid-feedback">
+            {% for erro in form_login.senha.errors %}
+              {{ erro }}
+            {% endfor %}
+          </div>
+          {% else %}
+            {{ form_login.senha(class="form-control") }}
+          {% endif %}
+        </div>
+        <div class="form-group espacin">
+        {{ form_login.lembrar_usuario.label(class="form-check-label") }}
+        {{ form_login.lembrar_usuario(class="form-check-input") }}
+        </div>
+      </fieldset>
+      {{ form_login.botao_login(class="btn btn-primary mt-2") }}
+    </form>
+  </div>
+{% endblock %}
